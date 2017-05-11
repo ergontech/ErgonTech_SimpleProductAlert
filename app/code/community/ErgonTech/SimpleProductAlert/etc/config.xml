@@ -5,4 +5,20 @@
             <version>0.1.0</version>
         </ErgonTech_SimpleProductAlert>
     </modules>
+    <global>
+        <blocks>
+            <simpleproductalert>
+                <class>ErgonTech_SimpleProductAlert_Block</class>
+            </simpleproductalert>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <ergontech_simpleproductalert>
+                    <file>ergontech_simpleproductalert.xml</file>
+                </ergontech_simpleproductalert>
+            </updates>
+        </layout>
+    </frontend>
 </config>

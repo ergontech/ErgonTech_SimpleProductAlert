@@ -1,0 +1,11 @@
+<layout>
+    <PRODUCT_TYPE_configurable>
+        <remove name="productalert.stock" />
+        <reference name="alert.urls">
+            <block type="simpleproductalert/configurable_product_view" name="simpleproductalert.stock"
+                   as="simpleproductalert_stock">
+                <block type="productalert/product_view" name="productalert_stock" template="productalert/product/view.phtml"/>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_configurable>
+</layout>
