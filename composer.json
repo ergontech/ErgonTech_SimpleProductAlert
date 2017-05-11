@@ -1,0 +1,46 @@
+{
+    "name": "ergontech/simpleproductalerts",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ErgonTech/MageTest_Utils"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.0",
+        "aydin-hassan/magento-core-composer-installer": "^1.4",
+        "magento/core": "^1.9",
+        "magetest/magento-phpunit-extension": "dev-develop",
+        "ergontech/magetest-utils": "dev-master"
+    },
+    "extra": {
+        "map": [
+            [
+                "app/etc/modules/ErgonTech_SimpleProductAlerts.xml",
+                "app/etc/modules/ErgonTech_SimpleProductAlerts.xml"
+            ],
+            [
+                "app/code/community/ErgonTech/SimpleProductAlerts/etc/config.xml",
+                "app/code/community/ErgonTech/SimpleProductAlerts/etc/config.xml"
+            ]
+        ],
+        "magento-root-dir": "root"
+    },
+    "autoload-dev": {
+        "files": [
+            "root/app/Mage.php"
+        ],
+        "psr-0": {
+            "": [
+                "app/code/local",
+                "app/code/community",
+                "root/app/code/community",
+                "root/app/code/core",
+                "root/lib"
+            ]
+        }
+    }
+}

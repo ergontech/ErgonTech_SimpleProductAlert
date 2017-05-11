@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <ErgonTech_SimpleProductAlert>
+            <version>0.1.0</version>
+        </ErgonTech_SimpleProductAlert>
+    </modules>
+</config>

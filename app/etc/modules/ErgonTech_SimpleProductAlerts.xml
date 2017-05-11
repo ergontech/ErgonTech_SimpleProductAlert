@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <ErgonTech_SimpleProductAlert>
+        <active>true</active>
+        <codePool>community</codePool>
+        <depends>
+            <Mage_ProductAlert/>
+        </depends>
+    </ErgonTech_SimpleProductAlert>
+</config>
