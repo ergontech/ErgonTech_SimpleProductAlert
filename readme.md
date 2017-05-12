@@ -9,7 +9,7 @@ TODO: Update version constraint, if applicable
 
 Require the module by running the following command:
 ```bash
-composer require ergontech/simpleproductalerts:dev-master
+composer require ergontech/simpleproductalert:dev-master
 ```
 
 ## Usage

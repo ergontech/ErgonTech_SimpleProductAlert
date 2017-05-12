@@ -1,5 +1,5 @@
 {
-    "name": "ergontech/simpleproductalerts",
+    "name": "ergontech/simpleproductalert",
     "repositories": [
         {
             "type": "vcs",
@@ -23,8 +23,12 @@
                 "app/etc/modules/ErgonTech_SimpleProductAlerts.xml"
             ],
             [
-                "app/code/community/ErgonTech/SimpleProductAlerts/etc/config.xml",
-                "app/code/community/ErgonTech/SimpleProductAlerts/etc/config.xml"
+                "app/code/community/ErgonTech/SimpleProductAlerts/",
+                "app/code/community/ErgonTech/SimpleProductAlerts/"
+            ],
+            [
+                "design/frontend/base/default/layout/ergontech_simpleproductalert.xml",
+                "design/frontend/base/default/layout/ergontech_simpleproductalert.xml"
             ]
         ],
         "magento-root-dir": "root"
