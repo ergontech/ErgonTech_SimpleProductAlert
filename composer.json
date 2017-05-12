@@ -1,5 +1,7 @@
 {
     "name": "ergontech/simpleproductalert",
+    "type": "magento-module",
+    "description": "Allow customers to subscribe to associated simple products of a visible configurable",
     "repositories": [
         {
             "type": "vcs",
