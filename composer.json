@@ -21,8 +21,8 @@
     "extra": {
         "map": [
             [
-                "app/etc/modules/ErgonTech_SimpleProductAlerts.xml",
-                "app/etc/modules/ErgonTech_SimpleProductAlerts.xml"
+                "app/etc/modules/ErgonTech_SimpleProductAlert.xml",
+                "app/etc/modules/ErgonTech_SimpleProductAlert.xml"
             ],
             [
                 "app/code/community/ErgonTech/SimpleProductAlerts/",
