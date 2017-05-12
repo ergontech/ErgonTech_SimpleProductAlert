@@ -29,8 +29,8 @@
                 "app/code/community/ErgonTech/SimpleProductAlert/"
             ],
             [
-                "design/frontend/base/default/layout/ergontech_simpleproductalert.xml",
-                "design/frontend/base/default/layout/ergontech_simpleproductalert.xml"
+                "app/design/frontend/base/default/layout/ergontech_simpleproductalert.xml",
+                "app/design/frontend/base/default/layout/ergontech_simpleproductalert.xml"
             ]
         ],
         "magento-root-dir": "root"
