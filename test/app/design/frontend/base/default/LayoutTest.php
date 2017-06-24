@@ -39,4 +39,20 @@ class LayoutTest extends \MageTest_PHPUnit_Framework_TestCase
         static::assertEquals('productalert/product/view.phtml', $node->getAttribute('template'));
     }
 
+    public function testSignupLabelIsSet()
+    {
+        $block = $this->layout->getXpath('PRODUCT_TYPE_configurable/reference[@name="alert.urls"]/block[@as="simpleproductalert_stock"]');
+        static::assertNotEmpty($block);
+
+        static::assertXpathHasResults(current($block), 'action[@method="setSignupLabel"][@translate="value"]/value[.="Sign up to get notified when this product is back in stock"]');
+    }
+
+    public function testCoreBlockIsAdded()
+    {
+        $result = $this->layout->getXpath('PRODUCT_TYPE_configurable/reference[@name="alert.urls"]/block[@as="simpleproductalert_stock"]');
+        static::assertNotEmpty($result);
+        $block = current($result);
+        static::assertXpathHasResults($block, 'block[@type="productalert/product_view"][@as="productalert_stock"]');
+    }
+
 }

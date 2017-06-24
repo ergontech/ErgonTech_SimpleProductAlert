@@ -4,8 +4,15 @@
         <reference name="alert.urls">
             <block type="simpleproductalert/configurable_product_view" name="simpleproductalert.stock"
                    as="simpleproductalert_stock">
-                <action method="prepareStockAlertData" />
-                <block type="productalert/product_view" name="productalert_stock" template="productalert/product/view.phtml"/>
+
+                <block type="productalert/product_view" as="productalert_stock" name="productalert_stock"
+                       template="productalert/product/view.phtml"/>
+
+                <action method="setSignupLabel" translate="value">
+                    <value>Sign up to get notified when this product is back in stock</value>
+                </action>
+
+                <action method="prepareStockAlertData"/>
             </block>
         </reference>
     </PRODUCT_TYPE_configurable>

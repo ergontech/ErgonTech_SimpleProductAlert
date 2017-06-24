@@ -11,6 +11,11 @@
                 <class>ErgonTech_SimpleProductAlert_Block</class>
             </simpleproductalert>
         </blocks>
+        <helpers>
+            <simpleproductalert>
+                <class>ErgonTech_SimpleProductAlert_Helper</class>
+            </simpleproductalert>
+        </helpers>
     </global>
     <frontend>
         <layout>
@@ -21,4 +26,10 @@
             </updates>
         </layout>
     </frontend>
+    <simpleproductalert>
+        <stock_predicate>
+            <class>ErgonTech_SimpleProductAlert_StockPredicate</class>
+            <function>check</function>
+        </stock_predicate>
+    </simpleproductalert>
 </config>
