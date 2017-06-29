@@ -41,4 +41,18 @@ XML
         $this->setExpectedException(ErgonTech_SimpleProductAlert_Exception_ConfigurationException::class);
         $subj->getStockPredicate();
     }
+
+    public function testGetPredicateWithNoData()
+    {
+        $refConfig = new ReflectionProperty(Mage::class, '_config');
+        $refConfig->setAccessible(true);
+        $refConfig->setValue(Mage::class, new Mage_Core_Model_Config_Base(<<<XML
+<config>
+</config>
+XML
+));
+        $subj = new ErgonTech_SimpleProductAlert_Helper_Data();
+        $this->setExpectedException(ErgonTech_SimpleProductAlert_Exception_ConfigurationException::class);
+        $subj->getStockPredicate();
+    }
 }
