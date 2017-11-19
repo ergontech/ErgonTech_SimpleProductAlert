@@ -31,6 +31,10 @@
             [
                 "app/design/frontend/base/default/layout/ergontech_simpleproductalert.xml",
                 "app/design/frontend/base/default/layout/ergontech_simpleproductalert.xml"
+            ],
+            [
+                "js/simpleproductalert/configurable.js",
+                "js/simpleproductalert/configurable.js"
             ]
         ],
         "magento-root-dir": "root"

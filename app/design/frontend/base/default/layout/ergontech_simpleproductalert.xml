@@ -1,5 +1,11 @@
 <layout>
     <PRODUCT_TYPE_configurable>
+        <reference name="head">
+            <action method="addJs">
+                <name>simpleproductalert/configurable.js</name>
+            </action>
+        </reference>
+
         <remove name="productalert.stock" />
         <reference name="alert.urls">
             <block type="simpleproductalert/configurable_product_view" name="simpleproductalert.stock"
