@@ -35,6 +35,10 @@
             [
                 "js/simpleproductalert/configurable.js",
                 "js/simpleproductalert/configurable.js"
+            ],
+            [
+                "app/design/frontend/base/default/template/simpleproductalert/",
+                "app/design/frontend/base/default/template/simpleproductalert/"
             ]
         ],
         "magento-root-dir": "root"

@@ -6,20 +6,36 @@
             </action>
         </reference>
 
-        <remove name="productalert.stock" />
-        <reference name="alert.urls">
+        <remove name="productalert.stock"/>
+
+        <reference name="product.info.addtocart">
             <block type="simpleproductalert/configurable_product_view" name="simpleproductalert.stock"
                    as="simpleproductalert_stock">
 
-                <block type="productalert/product_view" as="productalert_stock" name="productalert_stock"
-                       template="productalert/product/view.phtml"/>
-
                 <action method="setSignupLabel" translate="value">
-                    <value>Sign up to get notified when this product is back in stock</value>
+                    <value>Notify Me When Back in Stock</value>
                 </action>
+
+                <block type="productalert/product_view" as="productalert_stock" name="productalert_stock"
+                       template="simpleproductalert/product/view/button.phtml"/>
 
                 <action method="prepareStockAlertData"/>
             </block>
         </reference>
+
     </PRODUCT_TYPE_configurable>
+
+    <PRODUCT_TYPE_simple>
+        <reference name="product.info.addto">
+            <!-- add notify button here -->
+        </reference>
+    </PRODUCT_TYPE_simple>
+
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addJs">
+                <name>simpleproductalert/product.js</name>
+            </action>
+        </reference>
+    </catalog_product_view>
 </layout>
