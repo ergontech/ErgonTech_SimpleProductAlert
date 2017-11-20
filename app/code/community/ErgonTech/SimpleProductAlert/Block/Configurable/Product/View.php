@@ -10,6 +10,8 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
         /** @var Mage_Catalog_Model_Product[] $childrenProducts */
         $childrenProducts = $configurableTypeInstance->getUsedProducts();
 
+        $configurableAttributes = $configurableTypeInstance->getConfigurableAttributes($this->_product);
+
         /** @var Mage_ProductAlert_Block_Product_View $origStockInstance */
         $origStockInstance = $this->getChild('productalert_stock');
         $this->unsetChild('productalert_stock');
@@ -21,11 +23,14 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
         $childrenProducts = array_filter($childrenProducts, $simpleProductAlertHelper->getStockPredicate());
 
         foreach ($childrenProducts as $i => $child) {
+            /** @var Mage_ProductAlert_Block_Product_View $block */
             $block = $this->getLayout()->createBlock('productalert/product_view', 'simplechild_' . $i);
             $block->_product = $child;
             $block->setNameInLayout("simplechild_{$i}");
             $block->setTemplate($origStockInstance->getTemplate());
             $block->setData('signup_label', $this->getSignupLabel());
+            $block->setData('configurable_attributes_attrs',
+                $simpleProductAlertHelper->generateConfigurableAttributesAttrs($configurableAttributes, $child));
 
             $helper->setProduct($child);
             $block->setData('signup_url', $helper->getSaveUrl('stock'));
@@ -44,5 +49,4 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
         }
         return $html;
     }
-
 }
