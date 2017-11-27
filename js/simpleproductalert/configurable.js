@@ -10,7 +10,7 @@ if (Product instanceof Object &&
 
         Array.prototype.slice.call(disabledOptions).forEach(function (disabledOption) {
             disabledOption.setAttribute('data-allow-notify', true);
-            disabledOption.disabled = null;
+            disabledOption.disabled = false;
         });
     });
 
