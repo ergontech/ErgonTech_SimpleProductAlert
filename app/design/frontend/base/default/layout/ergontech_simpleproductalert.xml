@@ -17,7 +17,11 @@
                 </action>
 
                 <block type="productalert/product_view" as="productalert_stock" name="productalert_stock"
-                       template="simpleproductalert/product/view/button.phtml"/>
+                       template="simpleproductalert/product/view/button.phtml">
+                    <action method="setHidden">
+                        <hidden>true</hidden>
+                    </action>
+                </block>
 
                 <action method="prepareStockAlertData"/>
             </block>
@@ -26,8 +30,19 @@
     </PRODUCT_TYPE_configurable>
 
     <PRODUCT_TYPE_simple>
-        <reference name="product.info.addto">
-            <!-- add notify button here -->
+        <reference name="productalert.stock">
+            <action method="setTemplate">
+                <template>simpleproductalert/product/view/button.phtml</template>
+            </action>
+            <action method="setHidden">
+                <hidden>true</hidden>
+            </action>
+            <action method="prepareStockAlertData"/> <!-- template was changed, must recaclulate -->
+        </reference>
+        <reference name="head">
+            <action method="addJs">
+                <name>simpleproductalert/move_alert_button.js</name>
+            </action>
         </reference>
     </PRODUCT_TYPE_simple>
 

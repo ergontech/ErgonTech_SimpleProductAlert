@@ -37,6 +37,10 @@
                 "js/simpleproductalert/configurable.js"
             ],
             [
+                "js/simpleproductalert/move_alert_button.js",
+                "js/simpleproductalert/move_alert_button.js"
+            ],
+            [
                 "app/design/frontend/base/default/template/simpleproductalert/",
                 "app/design/frontend/base/default/template/simpleproductalert/"
             ]
