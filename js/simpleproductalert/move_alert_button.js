@@ -3,7 +3,7 @@ document.observe('dom:loaded', function (e) {
     'use strict';
 
     var link = document.querySelector('.simpleproductalert_notify-link');
-    var priceBox;
+    var addToBox;
 
     if (!link) {
         return;
@@ -11,12 +11,12 @@ document.observe('dom:loaded', function (e) {
 
     link.parentElement.removeChild(link);
 
-    priceBox = document.querySelector('.product-shop .add-to-box');
+    addToBox = document.querySelector('.product-shop .add-to-box');
 
-    if (!priceBox) {
+    if (!addToBox) {
         return;
     }
 
     link.hidden = false;
-    priceBox.parentElement.insertBefore(link, priceBox);
+    addToBox.parentElement.insertBefore(link, addToBox);
 });
