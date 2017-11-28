@@ -28,6 +28,7 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
             $block->_product = $child;
             $block->setNameInLayout("simplechild_{$i}");
             $block->setTemplate($origStockInstance->getTemplate());
+            $block->setData($origStockInstance->getData());
             $block->setData('signup_label', $this->getSignupLabel());
             $block->setData('configurable_attributes_attrs',
                 $simpleProductAlertHelper->generateConfigurableAttributesAttrs($configurableAttributes, $child));
