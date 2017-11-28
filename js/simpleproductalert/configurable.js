@@ -1,11 +1,8 @@
 if (Product instanceof Object &&
     Product.Config instanceof Object
 ) {
-    (function (configProto, cartButton) {
+    (function (configProto, cartButtonView) {
         'use strict';
-        document.observe('dom:loaded', function () {
-            cartButton = document.querySelector('#product_addtocart_form [onclick*="productAddToCartForm.submit"]');
-        });
 
         configProto.fillSelect = configProto.fillSelect.wrap(function (_super, element) {
             _super(element);
@@ -18,19 +15,42 @@ if (Product instanceof Object &&
             });
         });
 
-        configProto.configure = configProto.configure.wrap(function (_super, ev) {
+        configProto.configureElement = configProto.configureElement.wrap(function (_super, el) {
             $$('.simpleproductalert_notify-link').invoke('hide');
-            cartButton.style.display = 'initial';
-            _super(ev);
+            cartButtonView.show();
+            _super(el);
 
             var notifySelector = this.settings.map(function (el) {
                 if (el.options[el.selectedIndex].getAttribute('data-out-of-stock')) {
-                    cartButton.style.display = 'none';
+                    cartButtonView.hide();
                 }
                 return '[' + el.id.replace('attribute', 'data-') + '=' + el.value + ']'
             }).join('');
 
             $$(notifySelector).invoke('show');
         });
-    }(Product.Config.prototype));
+    }(Product.Config.prototype, (function (cartButtonSelector) {
+        var cartButton;
+        var state = 'initial';
+
+        document.observe('dom:loaded', function () {
+            cartButton = document.querySelector(cartButtonSelector);
+            renderState();
+        });
+        function renderState() {
+            if (cartButton) {
+                cartButton.style.display = state;
+            }
+        }
+        return {
+            hide: function () {
+                state = 'none';
+                renderState();
+            },
+            show: function () {
+                state = 'initial';
+                renderState();
+            }
+        }
+    }('#product_addtocart_form [onclick*="productAddToCartForm.submit"]'))));
 }
