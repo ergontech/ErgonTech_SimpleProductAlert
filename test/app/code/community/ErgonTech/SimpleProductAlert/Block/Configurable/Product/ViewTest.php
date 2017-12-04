@@ -21,6 +21,9 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_ViewTest extends P
             $secondProduct->reveal(),
         ])->shouldBeCalled();
 
+        $configurable->getConfigurableAttributes($product)
+            ->shouldBeCalled();
+
         $layout = $this->prophesize(Mage_Core_Model_Layout::class);
 
         $firstProductView = $this->prophesize(Mage_ProductAlert_Block_Product_View::class);
@@ -36,6 +39,9 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_ViewTest extends P
 
         $helper->getStockPredicate()
             ->willReturn(function () { return true ;});
+
+        $helper->generateConfigurableAttributesAttrs(\Prophecy\Argument::any(), \Prophecy\Argument::any())
+            ->willReturn('');
 
         Mage::register('_helper/simpleproductalert', $helper->reveal());
 

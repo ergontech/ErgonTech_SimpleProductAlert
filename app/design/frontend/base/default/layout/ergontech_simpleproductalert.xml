@@ -1,19 +1,56 @@
 <layout>
     <PRODUCT_TYPE_configurable>
-        <remove name="productalert.stock" />
-        <reference name="alert.urls">
+        <reference name="head">
+            <action method="addJs">
+                <name>simpleproductalert/configurable.js</name>
+            </action>
+        </reference>
+
+        <remove name="productalert.stock"/>
+
+        <reference name="product.info.addtocart">
             <block type="simpleproductalert/configurable_product_view" name="simpleproductalert.stock"
                    as="simpleproductalert_stock">
 
-                <block type="productalert/product_view" as="productalert_stock" name="productalert_stock"
-                       template="productalert/product/view.phtml"/>
-
                 <action method="setSignupLabel" translate="value">
-                    <value>Sign up to get notified when this product is back in stock</value>
+                    <value>Notify Me When Back in Stock</value>
                 </action>
+
+                <block type="productalert/product_view" as="productalert_stock" name="productalert_stock"
+                       template="simpleproductalert/product/view/button.phtml">
+                    <action method="setHidden">
+                        <hidden>true</hidden>
+                    </action>
+                </block>
 
                 <action method="prepareStockAlertData"/>
             </block>
         </reference>
+
     </PRODUCT_TYPE_configurable>
+
+    <PRODUCT_TYPE_simple>
+        <reference name="productalert.stock">
+            <action method="setTemplate">
+                <template>simpleproductalert/product/view/button.phtml</template>
+            </action>
+            <action method="setHidden">
+                <hidden>true</hidden>
+            </action>
+            <action method="prepareStockAlertData"/> <!-- template was changed, must recaclulate -->
+        </reference>
+        <reference name="head">
+            <action method="addJs">
+                <name>simpleproductalert/move_alert_button.js</name>
+            </action>
+        </reference>
+    </PRODUCT_TYPE_simple>
+
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addJs">
+                <name>simpleproductalert/product.js</name>
+            </action>
+        </reference>
+    </catalog_product_view>
 </layout>
