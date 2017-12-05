@@ -11,6 +11,7 @@
                             <show_in_website>1</show_in_website>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <frontend_type>select</frontend_type>
+                            <sort_order>100</sort_order>
                         </enabled>
                         <oos_helper_text translate="label">
                             <label>Text for 'out of stock' helper link</label>
@@ -21,6 +22,7 @@
                             <depends>
                                 <enabled>1</enabled>
                             </depends>
+                            <sort_order>110</sort_order>
                         </oos_helper_text>
                         <oos_modal translate="label">
                             <label>CMS Block to use as 'out of stock' helper message</label>
@@ -32,6 +34,7 @@
                             <depends>
                                 <enabled>1</enabled>
                             </depends>
+                            <sort_order>120</sort_order>
                         </oos_modal>
                     </fields>
                 </productalert>

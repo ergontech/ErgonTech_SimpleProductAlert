@@ -45,6 +45,22 @@ class ErgonTech_SimpleProductAlerts_etc_SystemTest extends \MageTest_PHPUnit_Fra
         }
     }
 
+    public function testFieldOrder()
+    {
+        // assert sequentially placed nodes have sort_orders which increase correspondingly
+
+        $nodes = $this->config->getNode()->xpath(static::GROUP_NODE_XPATH . '/fields/*');
+
+        static::assertNotEmpty($nodes);
+        $previousOrder = 0;
+        foreach ($nodes as $node) {
+            static::assertXpathHasResults($node, 'sort_order');
+            $order = (int)current($node->xpath('sort_order'));
+            static::assertGreaterThan($previousOrder, $order);
+            $previousOrder = $order;
+        }
+    }
+
     public function testSystemXmlPath()
     {
         static::assertEquals('config', $this->config->getNode()->getName());
