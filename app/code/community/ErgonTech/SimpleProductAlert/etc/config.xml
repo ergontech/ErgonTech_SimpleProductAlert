@@ -16,6 +16,11 @@
                 <class>ErgonTech_SimpleProductAlert_Helper</class>
             </simpleproductalert>
         </helpers>
+        <models>
+            <simpleproductalert>
+                <class>ErgonTech_SimpleProductAlert_Model</class>
+            </simpleproductalert>
+        </models>
     </global>
     <frontend>
         <layout>
