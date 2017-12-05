@@ -3,6 +3,9 @@
 class ErgonTech_SimpleProductAlert_Model_Source_Cms_Block
 {
     /** @var array */
+    protected $optionArray;
+
+    /** @var array */
     protected $pairs;
 
     /**
@@ -15,12 +18,16 @@ class ErgonTech_SimpleProductAlert_Model_Source_Cms_Block
             $this->toArray();
         }
 
-        $optionArray = array_map(function ($blockId) {
-            return [
-                'label' => $this->pairs[$blockId],
-                'value' => $blockId
-            ];
-        }, array_keys($this->pairs));
+        if ($this->optionArray === null) {
+            $this->OptionArray = array_map(function ($blockId) {
+                return [
+                    'label' => $this->pairs[$blockId],
+                    'value' => $blockId
+                ];
+            }, array_keys($this->pairs));
+        }
+
+        $optionArray = $this->optionArray;
 
         if ($withEmpty) {
             array_unshift($optionArray, [
