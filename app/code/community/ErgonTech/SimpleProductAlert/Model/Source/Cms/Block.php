@@ -14,17 +14,16 @@ class ErgonTech_SimpleProductAlert_Model_Source_Cms_Block
      */
     public function toOptionArray($withEmpty = true)
     {
-        if ($this->pairs === null) {
-            $this->toArray();
-        }
+        $pairs = $this->toArray();
 
         if ($this->optionArray === null) {
-            $this->OptionArray = array_map(function ($blockId) {
-                return [
-                    'label' => $this->pairs[$blockId],
+            $this->optionArray = [];
+            foreach ($pairs as $blockId => $name) {
+                $this->optionArray[] = [
+                    'label' => $name,
                     'value' => $blockId
                 ];
-            }, array_keys($this->pairs));
+            }
         }
 
         $optionArray = $this->optionArray;
