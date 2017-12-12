@@ -43,18 +43,18 @@ class ErgonTech_SimpleProductAlert_Model_Source_Cms_Block
      */
     public function toArray()
     {
-        if ($this->pairs !== null) {
-            return $this->pairs;
+        if ($this->pairs === null) {
+            /** @var Mage_Cms_Model_Resource_Block_Collection $blockResourceCollection */
+            $blockResourceCollection = Mage::getResourceModel('cms/block_collection');
+            $blockResourceCollection->addFieldToFilter('is_active', true);
+
+            $blocksSelect = $blockResourceCollection->getSelect();
+            $blocksSelect->reset(Zend_Db_Select::COLUMNS)
+                ->columns(['block_id', "CONCAT(title, ' (', identifier, ')')"]);
+
+            $this->pairs = $blockResourceCollection->getConnection()->fetchPairs($blocksSelect);
         }
-        /** @var Mage_Cms_Model_Resource_Block_Collection $blockResourceCollection */
-        $blockResourceCollection = Mage::getResourceModel('cms/block_collection');
-        $blockResourceCollection->addFieldToFilter('is_active', true);
 
-        $blocksSelect = $blockResourceCollection->getSelect();
-        $blocksSelect->reset(Zend_Db_Select::COLUMNS)
-            ->columns(['block_id', "CONCAT(title, ' (', identifier, ')')"]);
-
-        $this->pairs = $blockResourceCollection->getConnection()->fetchPairs($blocksSelect);
         return $this->pairs;
     }
 }
