@@ -45,7 +45,7 @@ class ErgonTech_SimpleProductAlert_Model_Source_Cms_Block
     {
         if ($this->pairs === null) {
             /** @var Mage_Cms_Model_Resource_Block_Collection $blockResourceCollection */
-            $blockResourceCollection = Mage::getResourceModel('cms/block_collection');
+            $blockResourceCollection = clone Mage::getResourceSingleton('cms/block_collection');
             $blockResourceCollection->addFieldToFilter('is_active', true);
 
             $blocksSelect = $blockResourceCollection->getSelect();
