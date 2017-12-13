@@ -15,6 +15,11 @@
             <simpleproductalert>
                 <class>ErgonTech_SimpleProductAlert_Helper</class>
             </simpleproductalert>
+            <productalert>
+                <rewrite>
+                    <data>ErgonTech_SimpleProductAlert_Helper_Productalert_Data</data>
+                </rewrite>
+            </productalert>
         </helpers>
         <resources>
             <simpleproductalert_setup>

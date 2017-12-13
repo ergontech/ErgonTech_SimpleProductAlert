@@ -36,6 +36,12 @@ class ErgonTech_SimpleProductAlerts_etc_ConfigTest extends \MageTest_PHPUnit_Fra
         static::assertXpathHasResults($helper, 'class[.="ErgonTech_SimpleProductAlert_Helper"]');
     }
 
+    public function testProductalertsHelperRewrite()
+    {
+        $helper = $this->config->getNode('global/helpers/productalert');
+        static::assertXpathHasResults($helper, 'rewrite/data[.="ErgonTech_SimpleProductAlert_Helper_Productalert_Data"]');
+    }
+
     public function testBlockDeclaration()
     {
         $block = $this->config->getNode('global/blocks/simpleproductalert');
