@@ -15,7 +15,23 @@
             <simpleproductalert>
                 <class>ErgonTech_SimpleProductAlert_Helper</class>
             </simpleproductalert>
+            <productalert>
+                <rewrite>
+                    <data>ErgonTech_SimpleProductAlert_Helper_Productalert_Data</data>
+                </rewrite>
+            </productalert>
         </helpers>
+        <resources>
+            <simpleproductalert_setup>
+                <setup>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                    <module>ErgonTech_SimpleProductAlert</module>
+                </setup>
+                <connection>
+                    <use>default_setup</use>
+                </connection>
+            </simpleproductalert_setup>
+        </resources>
         <models>
             <simpleproductalert>
                 <class>ErgonTech_SimpleProductAlert_Model</class>

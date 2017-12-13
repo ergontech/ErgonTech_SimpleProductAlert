@@ -2,6 +2,7 @@
 
 class ErgonTech_SimpleProductAlerts_etc_ConfigTest extends \MageTest_PHPUnit_Framework_TestCase
 {
+    const MODULE_NAME = 'ErgonTech_SimpleProductAlert';
     use \ErgonTech\MageTest\LayoutHelpers;
     /** @var  Mage_Core_Model_Config_Base */
     protected $config;
@@ -13,9 +14,9 @@ class ErgonTech_SimpleProductAlerts_etc_ConfigTest extends \MageTest_PHPUnit_Fra
 
     public function testModuleDeclaration()
     {
-        $module = $this->config->getNode('modules/ErgonTech_SimpleProductAlert');
+        $module = $this->config->getNode('modules/' . self::MODULE_NAME);
 
-        static::assertEquals('ErgonTech_SimpleProductAlert', $module->getName());
+        static::assertEquals(self::MODULE_NAME, $module->getName());
 
         static::assertTrue(version_compare($module->version, '0.0.0', '>='));
     }
@@ -35,6 +36,12 @@ class ErgonTech_SimpleProductAlerts_etc_ConfigTest extends \MageTest_PHPUnit_Fra
         static::assertXpathHasResults($helper, 'class[.="ErgonTech_SimpleProductAlert_Helper"]');
     }
 
+    public function testProductalertsHelperRewrite()
+    {
+        $helper = $this->config->getNode('global/helpers/productalert');
+        static::assertXpathHasResults($helper, 'rewrite/data[.="ErgonTech_SimpleProductAlert_Helper_Productalert_Data"]');
+    }
+
     public function testBlockDeclaration()
     {
         $block = $this->config->getNode('global/blocks/simpleproductalert');
@@ -47,5 +54,15 @@ class ErgonTech_SimpleProductAlerts_etc_ConfigTest extends \MageTest_PHPUnit_Fra
         $block = $this->config->getNode('global/models/simpleproductalert');
 
         static::assertXpathHasResults($block, 'class[.="ErgonTech_SimpleProductAlert_Model"]');
+    }
+
+    public function testSetupDeclaration()
+    {
+        $moduleName = static::MODULE_NAME;
+        $resource = $this->config->getNode('global/resources/simpleproductalert_setup');
+        static::assertXpathHasResults($resource, 'setup/class[.="Mage_Catalog_Model_Resource_Setup"]');
+        static::assertXpathHasResults($resource, "setup/module[.=\"{$moduleName}\"]");
+        static::assertXpathHasResults($resource, 'connection/use[.="default_setup"]');
+
     }
 }
