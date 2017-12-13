@@ -32,6 +32,11 @@
                 </connection>
             </simpleproductalert_setup>
         </resources>
+        <models>
+            <simpleproductalert>
+                <class>ErgonTech_SimpleProductAlert_Model</class>
+            </simpleproductalert>
+        </models>
     </global>
     <frontend>
         <layout>
