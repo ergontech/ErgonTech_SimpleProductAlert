@@ -1,5 +1,6 @@
 <?php
 
+use ErgonTech_SimpleProductAlert_Block_InstructionsTest as InstructionsTest;
 
 class ErgonTech_SimpleProductAlert_Block_InstructionsTest extends PHPUnit_Framework_TestCase
 {
@@ -7,9 +8,10 @@ class ErgonTech_SimpleProductAlert_Block_InstructionsTest extends PHPUnit_Framew
     protected function setUp()
     {
         Mage::reset();
+        Mage::app();
         $store = $this->prophesize(Mage_Core_Model_Store::class);
         $store->getConfig(ErgonTech_SimpleProductAlert_Block_Instructions::XML_PATH_OOS_MODAL)
-            ->willReturn('modal');
+            ->willReturn(1);
 
         $store->getConfig(ErgonTech_SimpleProductAlert_Block_Instructions::XML_PATH_OOS_HELPER_TEXT)
             ->willReturn('helper');
@@ -21,10 +23,17 @@ class ErgonTech_SimpleProductAlert_Block_InstructionsTest extends PHPUnit_Framew
 
         $app->getStore(\Prophecy\Argument::any())->willReturn($store->reveal());
 
+        $app->dispatchEvent(\Prophecy\Argument::cetera())->willReturn($app->reveal());
+
         static::setStaticPropertyValue($reflectionMage,
             '_isInstalled', true);
         static::setStaticPropertyValue($reflectionMage,
             '_app', $app->reveal());
+    }
+
+    protected function tearDown()
+    {
+        Mage::reset();
     }
 
     protected static function setStaticPropertyValue(ReflectionClass $reflectedClass, $propName, $propValue)
@@ -36,6 +45,20 @@ class ErgonTech_SimpleProductAlert_Block_InstructionsTest extends PHPUnit_Framew
 
     public function testGetOosContent()
     {
+        $cmsBlockResource = $this->prophesize(Mage_Cms_Model_Resource_Block::class);
+        $cmsBlockResource
+            ->load(\Prophecy\Argument::type(Mage_Cms_Model_Block::class), \Prophecy\Argument::cetera())
+            ->will(function ($args) {
+                list($block, $id) = $args;
+                InstructionsTest::assertEquals(1, $id);
+                $block->setData([
+                    'block_id' => $id,
+                    'content' => 'modal'
+                ]);
+            });
+
+        Mage::register('_resource_singleton/cms/block', $cmsBlockResource->reveal());
+
         $subj = new ErgonTech_SimpleProductAlert_Block_Instructions();
         static::assertEquals('modal', $subj->getOosContent());
     }
