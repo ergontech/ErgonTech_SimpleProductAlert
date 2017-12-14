@@ -23,6 +23,9 @@
                     </action>
                 </block>
 
+                <block type="simpleproductalert/instructions" name="simpleproductalert.stock.instructions"
+                       as="instructions" template="simpleproductalert/instructions/default.phtml" />
+
                 <action method="prepareStockAlertData"/>
             </block>
         </reference>

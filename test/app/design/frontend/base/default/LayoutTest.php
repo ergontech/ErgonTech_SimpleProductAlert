@@ -55,4 +55,14 @@ class LayoutTest extends \MageTest_PHPUnit_Framework_TestCase
         static::assertXpathHasResults($block, 'block[@type="productalert/product_view"][@as="productalert_stock"]');
     }
 
+    public function testInstructionBlockIsAddedToStockAlertBlock()
+    {
+        $configurableHandle = $this->layout->getXpath('PRODUCT_TYPE_configurable');
+        static::assertCount(1, $configurableHandle);
+
+        $alertBlock = 'block[@name="simpleproductalert.stock"][@type="simpleproductalert/configurable_product_view"]';
+        $instructionBlock = 'block[@type="simpleproductalert/instructions"][@as="instructions"]';
+        static::assertXpathHasResults(current($configurableHandle), "//{$alertBlock}/$instructionBlock");
+    }
+
 }

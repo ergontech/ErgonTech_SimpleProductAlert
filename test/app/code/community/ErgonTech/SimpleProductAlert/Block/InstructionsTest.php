@@ -1,18 +1,18 @@
 <?php
-/**
- * Date: 12/13/17
- * Time: 10:22
- */
 
 
-class ErgonTech_SimpleProductAlert_Helper_Productalert_DataTest extends PHPUnit_Framework_TestCase
+class ErgonTech_SimpleProductAlert_Block_InstructionsTest extends PHPUnit_Framework_TestCase
 {
+
     protected function setUp()
     {
         Mage::reset();
         $store = $this->prophesize(Mage_Core_Model_Store::class);
-        $store->getConfig(Mage_ProductAlert_Model_Observer::XML_PATH_STOCK_ALLOW)
-            ->willReturn(1, 0);
+        $store->getConfig(ErgonTech_SimpleProductAlert_Block_Instructions::XML_PATH_OOS_MODAL)
+            ->willReturn('modal');
+
+        $store->getConfig(ErgonTech_SimpleProductAlert_Block_Instructions::XML_PATH_OOS_HELPER_TEXT)
+            ->willReturn('helper');
 
         $reflectionMage = new ReflectionClass(Mage::class);
 
@@ -34,17 +34,15 @@ class ErgonTech_SimpleProductAlert_Helper_Productalert_DataTest extends PHPUnit_
         $prop->setValue($propValue);
     }
 
-    public function testIsStockAlertAllowed()
+    public function testGetOosContent()
     {
-        $product = $this->prophesize(Mage_Catalog_Model_Product::class);
-        $product->getData('productalert_stock')->willReturn(1, 0, 2, 2);
-        $subj = new ErgonTech_SimpleProductAlert_Helper_Productalert_Data();
-        $subj->setProduct($product->reveal());
-
-        static::assertTrue($subj->isStockAlertAllowed());
-        static::assertFalse($subj->isStockAlertAllowed());
-        static::assertTrue($subj->isStockAlertAllowed());
-        static::assertFalse($subj->isStockAlertAllowed());
+        $subj = new ErgonTech_SimpleProductAlert_Block_Instructions();
+        static::assertEquals('modal', $subj->getOosContent());
     }
 
+    public function testGetOosHelperText()
+    {
+        $subj = new ErgonTech_SimpleProductAlert_Block_Instructions();
+        static::assertEquals('helper', $subj->getOosHelperText());
+    }
 }
