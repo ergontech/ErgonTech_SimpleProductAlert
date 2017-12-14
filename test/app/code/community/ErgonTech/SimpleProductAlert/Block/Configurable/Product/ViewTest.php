@@ -28,9 +28,34 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_ViewTest extends P
 
         $firstProductView = $this->prophesize(Mage_ProductAlert_Block_Product_View::class);
         $secondProductView = $this->prophesize(Mage_ProductAlert_Block_Product_View::class);
+
+        $notifyLinks = $this->prophesize(Mage_Core_Block_Text_List::class);
+
+        $notifyLinks->getIsAnonymous()
+            ->willReturn(false);
+
+        $notifyLinks->setParentBlock(\Prophecy\Argument::type(ErgonTech_SimpleProductAlert_Block_Configurable_Product_View::class))
+            ->willReturn(null);
+
+        $notifyLinks->setBlockAlias(\Prophecy\Argument::type('string'))
+            ->willReturn(null);
+
+        $notifyLinks
+            ->setChild('mychild0', \Prophecy\Argument::type(Mage_ProductAlert_Block_Product_View::class))
+            ->shouldBeCalled();
+
+        $notifyLinks
+            ->setChild('mychild1', \Prophecy\Argument::type(Mage_ProductAlert_Block_Product_View::class))
+            ->shouldBeCalled();
+
+        $layout->createBlock('core/text_list', 'notify_links')
+            ->shouldBeCalled()
+            ->willReturn($notifyLinks->reveal());
+
         $layout->createBlock('productalert/product_view', 'simplechild_0')
             ->shouldBeCalled()
             ->willReturn($firstProductView);
+
         $layout->createBlock('productalert/product_view', 'simplechild_1')
             ->shouldBeCalled()
             ->willReturn($secondProductView);
@@ -49,20 +74,31 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_ViewTest extends P
         $subj->setLayout($layout->reveal());
         $subj->setChild('productalert_stock', $origBlock->reveal());
         $subj->prepareStockAlertData();
-
-        static::assertCount(2, $subj->getChild());
     }
 
     public function testToHtml()
     {
         $subj = new ErgonTech_SimpleProductAlert_Block_Configurable_Product_View();
         $block = new MockBlockClass('hello');
-        $block2 = new MockBlockClass('goodbye');
 
-        $subj->setChild('first', $block);
-        $subj->setChild('second', $block2);
+        $subj->setChild('notify_links', $block);
 
-        static::assertEquals('hellogoodbye', $subj->toHtml());
+        static::assertEquals('hello', $subj->toHtml());
+    }
+
+    public function testAfterToHtmlWithoutLinks()
+    {
+        $subj = new ErgonTech_SimpleProductAlert_Block_Configurable_Product_View();
+        $subj->setChild('instructions', new MockBlockClass(' world!'));
+        static::assertEquals('', $subj->toHtml());
+    }
+
+    public function testAfterToHtmlWithLinks()
+    {
+        $subj = new ErgonTech_SimpleProductAlert_Block_Configurable_Product_View();
+        $subj->setChild('instructions', new MockBlockClass(' world!'));
+        $subj->setChild('notify_links', new MockBlockClass('hello'));
+        static::assertEquals('hello world!', $subj->toHtml());
     }
 }
 

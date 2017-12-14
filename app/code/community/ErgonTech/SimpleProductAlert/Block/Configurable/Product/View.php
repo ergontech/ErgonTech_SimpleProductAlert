@@ -22,6 +22,8 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
         $simpleProductAlertHelper = Mage::helper('simpleproductalert');
         $childrenProducts = array_filter($childrenProducts, $simpleProductAlertHelper->getStockPredicate());
 
+        $notifyLinks = $this->getLayout()->createBlock('core/text_list', 'notify_links');
+
         foreach ($childrenProducts as $i => $child) {
             /** @var Mage_ProductAlert_Block_Product_View $block */
             $block = $this->getLayout()->createBlock('productalert/product_view', 'simplechild_' . $i);
@@ -36,18 +38,23 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
             $helper->setProduct($child);
             $block->setData('signup_url', $helper->getSaveUrl('stock'));
 
-            $this->setChild("mychild{$i}", $block);
+            $notifyLinks->setChild("mychild{$i}", $block);
         }
+        $this->setChild('notify_links', $notifyLinks);
         $helper->setProduct(Mage::registry('current_product'));
     }
 
     protected function _toHtml()
     {
-        $html = '';
-        foreach ($this->getChild() as $child) {
-            /** @var $child Mage_ProductAlert_Block_Product_View */
-            $html .= $child->toHtml();
+        return $this->getChildHtml('notify_links');
+    }
+
+    protected function _afterToHtml($html)
+    {
+        if ($html === '') {
+            return '';
         }
-        return $html;
+
+        return $html . $this->getChildHtml('instructions');
     }
 }
