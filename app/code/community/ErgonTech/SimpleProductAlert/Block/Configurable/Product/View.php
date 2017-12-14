@@ -38,7 +38,7 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
             $helper->setProduct($child);
             $block->setData('signup_url', $helper->getSaveUrl('stock'));
 
-            $notifyLinks->setChild("mychild{$i}", $block);
+            $notifyLinks->insert($block);
         }
         $this->setChild('notify_links', $notifyLinks);
         $helper->setProduct(Mage::registry('current_product'));

@@ -41,11 +41,11 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_ViewTest extends P
             ->willReturn(null);
 
         $notifyLinks
-            ->setChild('mychild0', \Prophecy\Argument::type(Mage_ProductAlert_Block_Product_View::class))
+            ->insert(\Prophecy\Argument::type(Mage_ProductAlert_Block_Product_View::class))
             ->shouldBeCalled();
 
         $notifyLinks
-            ->setChild('mychild1', \Prophecy\Argument::type(Mage_ProductAlert_Block_Product_View::class))
+            ->insert(\Prophecy\Argument::type(Mage_ProductAlert_Block_Product_View::class))
             ->shouldBeCalled();
 
         $layout->createBlock('core/text_list', 'notify_links')
