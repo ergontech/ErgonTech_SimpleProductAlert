@@ -6,9 +6,17 @@ class ErgonTech_SimpleProductAlert_Block_Instructions extends Mage_Core_Block_Te
 
     const XML_PATH_OOS_HELPER_TEXT = 'catalog/productalert/oos_helper_text';
 
+    /** @var string */
+    protected $oosContent;
+
     public function getOosContent()
     {
-        return Mage::getStoreConfig(self::XML_PATH_OOS_MODAL);
+        if ($this->oosContent === null) {
+            $block = Mage::getModel('cms/block');
+            $this->oosContent = $block->load(Mage::getStoreConfig(self::XML_PATH_OOS_MODAL))->getContent();
+        }
+
+        return $this->oosContent;
     }
 
     public function getOosHelperText()
