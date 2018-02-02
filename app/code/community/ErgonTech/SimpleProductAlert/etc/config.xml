@@ -36,6 +36,11 @@
             <simpleproductalert>
                 <class>ErgonTech_SimpleProductAlert_Model</class>
             </simpleproductalert>
+            <productalert>
+                <rewrite>
+                    <observer>ErgonTech_SimpleProductAlert_Model_ProductAlert_Observer</observer>
+                </rewrite>
+            </productalert>
         </models>
     </global>
     <frontend>
