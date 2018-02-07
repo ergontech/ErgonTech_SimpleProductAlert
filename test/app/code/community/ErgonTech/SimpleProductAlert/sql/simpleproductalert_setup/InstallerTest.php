@@ -18,6 +18,7 @@ class ErgonTech_SimpleProductAlert_sql_simpleproductalert_setup_InstallerTest ex
             InstallerTest::assertEquals('productalert_stock', $attrcode);
 
             InstallerTest::assertArraySubset(['input' => 'select'], $attrData);
+            InstallerTest::assertArraySubset(['input_renderer' => 'simpleproductalert/adminhtml_select_renderer'], $attrData);
             InstallerTest::assertArraySubset(['label' => 'Allow stock notifications for product?'], $attrData);
             InstallerTest::assertArraySubset(['source' => 'catalog/product_attribute_source_boolean'], $attrData);
             InstallerTest::assertArraySubset(['required' => false], $attrData);
