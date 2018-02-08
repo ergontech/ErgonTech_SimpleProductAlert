@@ -18,9 +18,13 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
 
         $helper = Mage::helper('productalert');
 
-        /** @var ErgonTech_SimpleProductAlert_Helper_Data $simpleProductAlertHelper */
-        $simpleProductAlertHelper = Mage::helper('simpleproductalert');
-        $childrenProducts = array_filter($childrenProducts, $simpleProductAlertHelper->getStockPredicate());
+        /** @var ErgonTech_SimpleProductAlert_Helper_Data $dataHelper */
+        $dataHelper = Mage::helper('simpleproductalert');
+
+        /** @var ErgonTech_SimpleProductAlert_Helper_Predicate $predicateHelper */
+        $predicateHelper = Mage::helper('simpleproductalert/predicate');
+
+        $childrenProducts = array_filter($childrenProducts, $predicateHelper->getPredicate('subscribe'));
 
         $notifyLinks = $this->getLayout()->createBlock('core/text_list', 'notify_links');
 
@@ -33,7 +37,7 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_View extends Mage_
             $block->setData($origStockInstance->getData());
             $block->setData('signup_label', $this->getSignupLabel());
             $block->setData('configurable_attributes_attrs',
-                $simpleProductAlertHelper->generateConfigurableAttributesAttrs($configurableAttributes, $child));
+                $dataHelper->generateConfigurableAttributesAttrs($configurableAttributes, $child));
 
             $helper->setProduct($child);
             $block->setData('signup_url', $helper->getSaveUrl('stock'));

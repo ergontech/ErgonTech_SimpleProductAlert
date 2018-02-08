@@ -60,15 +60,17 @@ class ErgonTech_SimpleProductAlert_Block_Configurable_Product_ViewTest extends P
             ->shouldBeCalled()
             ->willReturn($secondProductView);
 
-        $helper = $this->prophesize(ErgonTech_SimpleProductAlert_Helper_Data::class);
-
-        $helper->getStockPredicate()
+        /** @var ErgonTech_SimpleProductAlert_Helper_Predicate $predicateHelper */
+        $predicateHelper = $this->prophesize(ErgonTech_SimpleProductAlert_Helper_Predicate::class);
+        $predicateHelper->getPredicate('subscribe')
             ->willReturn(function () { return true ;});
 
-        $helper->generateConfigurableAttributesAttrs(\Prophecy\Argument::any(), \Prophecy\Argument::any())
+        $dataHelper = $this->prophesize(ErgonTech_SimpleProductAlert_Helper_Data::class);
+        $dataHelper->generateConfigurableAttributesAttrs(\Prophecy\Argument::any(), \Prophecy\Argument::any())
             ->willReturn('');
 
-        Mage::register('_helper/simpleproductalert', $helper->reveal());
+        Mage::register('_helper/simpleproductalert', $dataHelper->reveal());
+        Mage::register('_helper/simpleproductalert/predicate', $predicateHelper->reveal());
 
         $subj = new ErgonTech_SimpleProductAlert_Block_Configurable_Product_View();
         $subj->setLayout($layout->reveal());

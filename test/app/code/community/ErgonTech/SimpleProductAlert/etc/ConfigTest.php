@@ -21,12 +21,18 @@ class ErgonTech_SimpleProductAlerts_etc_ConfigTest extends \MageTest_PHPUnit_Fra
         static::assertTrue(version_compare($module->version, '0.0.0', '>='));
     }
 
-    public function testStockCheckCallableWithStaticClass()
+    public function testSubscribeCallableWithStaticClass()
     {
-        $callable = $this->config->getNode('simpleproductalert/stock_predicate');
+        $callable = $this->config->getNode('simpleproductalert/subscribe');
 
-        static::assertXpathHasResults($callable, 'class[.="ErgonTech_SimpleProductAlert_StockPredicate"]');
-        static::assertXpathHasResults($callable, 'function[.="check"]');
+        static::assertXpathHasResults($callable, 'class[.="ErgonTech_SimpleProductAlert_CanSubscribePredicate"]');
+    }
+
+    public function testNotifyCallableWithStaticClass()
+    {
+        $callable = $this->config->getNode('simpleproductalert/notify');
+
+        static::assertXpathHasResults($callable, 'class[.="ErgonTech_SimpleProductAlert_CanNotifyPredicate"]');
     }
 
     public function testHelperDeclaration()
