@@ -17,7 +17,10 @@ class ErgonTech_SimpleProductAlert_Model_ProductAlert_Observer extends Mage_Prod
          * @author Matthew Wells <matthew@ergon.tech>
          * Get some variables ready for OVERRIDE
          */
-        $isUnavailable = Mage::helper('simpleproductalert')->getStockPredicate();
+        /** @var callable $canNotify */
+        $canNotify = Mage::helper('simpleproductalert/predicate')->getPredicate('notify');
+
+        /** @var ErgonTech_SimpleProductAlert_Helper_Data $productAlertHelper */
         $productAlertHelper = Mage::helper('productalert');
 
         foreach ($this->_getWebsites() as $website) {
@@ -85,7 +88,7 @@ class ErgonTech_SimpleProductAlert_Model_ProductAlert_Observer extends Mage_Prod
                      * @author Matthew Wells <matthew@ergon.tech>
                      * Use the stock predicate, reflecting the inverse of "can I sign up?"
                      */
-                    if (!$isUnavailable($product)) {
+                    if ($canNotify($product)) {
                         $email->addStockProduct($product);
 
                         $alert->setSendDate(Mage::getModel('core/date')->gmtDate());

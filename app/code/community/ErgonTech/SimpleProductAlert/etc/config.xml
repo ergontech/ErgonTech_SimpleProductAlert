@@ -53,9 +53,11 @@
         </layout>
     </frontend>
     <simpleproductalert>
-        <stock_predicate>
-            <class>ErgonTech_SimpleProductAlert_StockPredicate</class>
-            <function>check</function>
-        </stock_predicate>
+        <subscribe>
+            <class>ErgonTech_SimpleProductAlert_CanSubscribePredicate</class>
+        </subscribe>
+        <notify>
+            <class>ErgonTech_SimpleProductAlert_CanNotifyPredicate</class>
+        </notify>
     </simpleproductalert>
 </config>

@@ -1,6 +1,6 @@
 <?php
 
-class ErgonTech_SimpleProductAlert_StockPredicate
+class ErgonTech_SimpleProductAlert_CanSubscribePredicate implements ErgonTech_SimpleProductAlert_PredicateInterface
 {
     /**
      * @param Mage_Catalog_Model_Product $product
